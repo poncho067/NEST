@@ -1,4 +1,4 @@
-const estateImage = "url('assets/san-pedro-estate.png')";
+const estateImage = "url('assets/nest-san-pedro-estate-v2.png')";
 
 const icons = {
   activity: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 12h-4l-3 8-6-16-3 8H2"/></svg>',
@@ -9,12 +9,16 @@ const icons = {
   home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>',
   key: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="7.5" cy="14.5" r="3.5"/><path d="M10 12 21 1"/><path d="m18 4 2 2"/><path d="m15 7 2 2"/></svg>',
   layout: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+  menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 7h16M4 12h16M4 17h16"/></svg>',
   plane: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17.8 19.2 16 11l5-5a2 2 0 0 0-3-3l-5 5-8.2-1.8L3 8l6 4-4 4-3-.5L1 17l4 2 2 4 1.5-1 -.5-3 4-4 4 6 1.8-1.8Z"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 5v14M5 12h14"/></svg>',
   refresh: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 0 1-15.4 6.4L3 16"/><path d="M3 16h6v6"/><path d="M3 12A9 9 0 0 1 18.4 5.6L21 8"/><path d="M21 8h-6V2"/></svg>',
   search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>',
   users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
   wallet: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 7V6a2 2 0 0 0-2-2H5a3 3 0 0 0 0 6h15v10H5a3 3 0 0 1-3-3V7"/><path d="M16 14h.01"/></svg>',
-  wrench: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14.7 6.3a4 4 0 0 0-5 5L3 18l3 3 6.7-6.7a4 4 0 0 0 5-5L15 12l-3-3 2.7-2.7Z"/></svg>'
+  wrench: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14.7 6.3a4 4 0 0 0-5 5L3 18l3 3 6.7-6.7a4 4 0 0 0 5-5L15 12l-3-3 2.7-2.7Z"/></svg>',
+  close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m6 6 12 12M18 6 6 18"/></svg>',
+  'arrow-right': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
 };
 
 const properties = [
@@ -99,13 +103,36 @@ const properties = [
 const staff = [
   { id: 1, name: "Marcela Ruiz", role: "Estate Manager", propertyId: "sierra", department: "Operations", salary: 96000, status: "Approved", note: "Coordinates vendors, owner requests, and household calendars." },
   { id: 2, name: "Jorge Cantu", role: "Security Lead", propertyId: "sierra", department: "Security", salary: 68000, status: "Pending", note: "Supervises overnight rotations and camera escalation protocol." },
-  { id: 3, name: "Ana Beltran", role: "Housekeeping Chief", propertyId: "sierra", department: "Housekeeping", salary: 48000, status: "Approved", note: "Runs staff assignments for residence prep and inventories." },
+  { id: 3, name: "Ana Beltran", role: "Housekeeping Chief", propertyId: "sierra", department: "Housekeeping", salary: 48000, status: "Approved", note: "Runs residence preparation, assignments, and inventories." },
+  { id: 10, name: "Emilio Torres", role: "Executive Chef", propertyId: "sierra", department: "Hospitality", salary: 72000, status: "Approved", note: "Plans family menus and oversees kitchen sourcing." },
+  { id: 11, name: "Laura Salinas", role: "Family Assistant", propertyId: "sierra", department: "Operations", salary: 64000, status: "Approved", note: "Coordinates family calendars, guests, clubs, and travel." },
+  { id: 12, name: "Carlos Meza", role: "Executive Driver", propertyId: "sierra", department: "Transport", salary: 46000, status: "Pending", note: "Maintains executive vehicles and transfer readiness." },
+  { id: 13, name: "Beatriz Luna", role: "Senior Housekeeper", propertyId: "sierra", department: "Housekeeping", salary: 36000, status: "Approved", note: "Leads private rooms, wardrobe care, and turndown service." },
+  { id: 14, name: "Tomas Navarro", role: "Housekeeper", propertyId: "sierra", department: "Housekeeping", salary: 32000, status: "Approved", note: "Maintains guest suites and daily residence standards." },
+  { id: 15, name: "Miguel Arriaga", role: "Head Gardener", propertyId: "sierra", department: "Grounds", salary: 42000, status: "Approved", note: "Oversees native gardens, irrigation, and pool landscaping." },
+  { id: 16, name: "Paola Reyna", role: "Laundry Specialist", propertyId: "sierra", department: "Housekeeping", salary: 35000, status: "Pending", note: "Manages fine linens, wardrobe rotation, and textile care." },
+  { id: 17, name: "Hector Trevino", role: "Facilities Engineer", propertyId: "sierra", department: "Maintenance", salary: 56000, status: "Approved", note: "Owns HVAC, backup power, water, and building systems." },
+  { id: 18, name: "Daniel Sada", role: "Night Security", propertyId: "sierra", department: "Security", salary: 44000, status: "Pending", note: "Covers perimeter patrol and after-hours access events." },
   { id: 4, name: "Diego Alvarez", role: "Driver", propertyId: "valle", department: "Transport", salary: 43000, status: "Pending", note: "Manages executive transfer schedule and vehicle checks." },
   { id: 5, name: "Sofia Ibarra", role: "Family Assistant", propertyId: "valle", department: "Operations", salary: 62000, status: "Approved", note: "Handles school, club, travel, and guest arrangements." },
+  { id: 19, name: "Elena Guerra", role: "Housekeeping Chief", propertyId: "valle", department: "Housekeeping", salary: 47000, status: "Approved", note: "Runs cleaning schedules, inventories, and guest readiness." },
+  { id: 20, name: "Adrian Leal", role: "Private Chef", propertyId: "valle", department: "Hospitality", salary: 59000, status: "Approved", note: "Prepares daily family meals and manages provisioning." },
+  { id: 21, name: "Monica Pena", role: "Childcare Lead", propertyId: "valle", department: "Family Care", salary: 52000, status: "Approved", note: "Coordinates childcare routines and school logistics." },
+  { id: 22, name: "Rosa Villarreal", role: "Housekeeper", propertyId: "valle", department: "Housekeeping", salary: 33000, status: "Approved", note: "Maintains family rooms, guest suites, and linens." },
+  { id: 23, name: "Saul Tamez", role: "Groundskeeper", propertyId: "valle", department: "Grounds", salary: 36000, status: "Pending", note: "Maintains gardens, exterior lighting, and irrigation." },
+  { id: 24, name: "Ivan Lozano", role: "Security Officer", propertyId: "valle", department: "Security", salary: 42000, status: "Approved", note: "Operates access control and family arrival protocols." },
   { id: 6, name: "Ramon Garza", role: "Facilities Technician", propertyId: "campestre", department: "Maintenance", salary: 41000, status: "Pending", note: "Tracks HVAC, elevators, backup power, and access systems." },
   { id: 7, name: "Lucia Vega", role: "Housekeeper", propertyId: "campestre", department: "Housekeeping", salary: 32000, status: "Approved", note: "Maintains city residence readiness and linen inventory." },
+  { id: 25, name: "Natalia Cano", role: "Residence Concierge", propertyId: "campestre", department: "Operations", salary: 51000, status: "Approved", note: "Coordinates arrivals, reservations, and city services." },
+  { id: 26, name: "Luis Caballero", role: "Driver", propertyId: "campestre", department: "Transport", salary: 40000, status: "Approved", note: "Covers airport, club, and business transfers." },
+  { id: 27, name: "Alberto Casas", role: "Night Security", propertyId: "campestre", department: "Security", salary: 43000, status: "Pending", note: "Monitors lobby access and overnight camera escalation." },
   { id: 8, name: "Oscar Medina", role: "Groundskeeper", propertyId: "chipinque", department: "Grounds", salary: 38000, status: "Pending", note: "Maintains gardens, pool deck, and exterior lighting." },
-  { id: 9, name: "Patricia Rios", role: "Chef", propertyId: "chipinque", department: "Hospitality", salary: 57000, status: "Approved", note: "Prepares guest menus and manages kitchen procurement." }
+  { id: 9, name: "Patricia Rios", role: "Chef", propertyId: "chipinque", department: "Hospitality", salary: 57000, status: "Approved", note: "Prepares guest menus and manages kitchen procurement." },
+  { id: 28, name: "Camila Solis", role: "Guest Relations", propertyId: "chipinque", department: "Operations", salary: 49000, status: "Approved", note: "Coordinates private stays, amenities, and local arrangements." },
+  { id: 29, name: "Julia Escamilla", role: "Housekeeper", propertyId: "chipinque", department: "Housekeeping", salary: 32000, status: "Approved", note: "Maintains guest suites and arrival presentation." },
+  { id: 30, name: "Nicolas Flores", role: "Grounds Assistant", propertyId: "chipinque", department: "Grounds", salary: 31000, status: "Approved", note: "Supports trails, gardens, pool service, and lighting." },
+  { id: 31, name: "Gerardo Mier", role: "Maintenance Technician", propertyId: "chipinque", department: "Maintenance", salary: 43000, status: "Approved", note: "Maintains HVAC, pumps, access, and guest systems." },
+  { id: 32, name: "Felipe Ortiz", role: "Security Officer", propertyId: "chipinque", department: "Security", salary: 42000, status: "Pending", note: "Covers driveway access, trail gate, and overnight patrol." }
 ];
 
 const cameras = [
@@ -206,6 +233,20 @@ const shortNumber = new Intl.NumberFormat("en", {
   maximumFractionDigits: 1
 });
 
+const commandItems = [
+  { section: "overview", icon: "layout", title: "Portfolio overview", detail: "Health, decisions, and activity" },
+  { section: "properties", icon: "home", title: "Properties", detail: "Residence readiness and operating spend" },
+  { section: "staff", icon: "users", title: "Staff directory", detail: "Household roles and assignments" },
+  { section: "payroll", icon: "wallet", title: "Payroll", detail: "Review and approve the current cycle" },
+  { section: "cameras", icon: "camera", title: "Security cameras", detail: "Live access and perimeter feeds" },
+  { section: "maintenance", icon: "wrench", title: "Maintenance", detail: "Work orders, due dates, and vendors" },
+  { section: "utilities", icon: "bolt", title: "Utilities", detail: "Cost and consumption by property" },
+  { section: "flights", icon: "plane", title: "Travel desk", detail: "Flights and transfers to each property" },
+  { section: "rentals", icon: "key", title: "Rental management", detail: "Direct requests and channel sync" }
+];
+
+let toastTimer;
+
 function hydrateIcons() {
   document.querySelectorAll("[data-icon]").forEach((node) => {
     const name = node.getAttribute("data-icon");
@@ -221,6 +262,67 @@ function selectedProperty() {
 
 function propertyName(id) {
   return properties.find((property) => property.id === id)?.name || "Portfolio";
+}
+
+function activateProperty(id) {
+  const property = properties.find((item) => item.id === id);
+  if (!property) return;
+  state.propertyId = property.id;
+  state.flightPropertyId = property.id;
+  const firstCamera = cameras.find((camera) => camera.propertyId === property.id);
+  if (firstCamera) state.selectedCameraId = firstCamera.id;
+  renderAll();
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  document.getElementById("toastMessage").textContent = message;
+  toast.classList.add("is-visible");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 2600);
+}
+
+function sanitizeText(value) {
+  return value.replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[character]);
+}
+
+function setNotifications(open) {
+  document.body.classList.toggle("drawer-open", open);
+  document.getElementById("notificationDrawer").setAttribute("aria-hidden", String(!open));
+}
+
+function renderCommandResults(query = "") {
+  const normalized = query.trim().toLowerCase();
+  const matches = commandItems.filter((item) => `${item.title} ${item.detail}`.toLowerCase().includes(normalized));
+  document.getElementById("commandResults").innerHTML = matches.length
+    ? matches
+        .map(
+          (item) => `
+            <button class="command-result" type="button" data-command-section="${item.section}">
+              <span data-icon="${item.icon}"></span>
+              <span><strong>${item.title}</strong><small>${item.detail}</small></span>
+              <span data-icon="arrow-right"></span>
+            </button>
+          `
+        )
+        .join("")
+    : '<div class="command-empty">No matching workspace found.</div>';
+  hydrateIcons();
+}
+
+function openCommandDialog() {
+  const dialog = document.getElementById("commandDialog");
+  const input = document.getElementById("commandSearch");
+  input.value = "";
+  renderCommandResults();
+  dialog.showModal();
+  input.focus();
 }
 
 function filteredStaff() {
@@ -307,17 +409,18 @@ function setPanel(section) {
     panel.classList.toggle("is-visible", visible);
   });
   const titles = {
-    overview: "Private estate command center",
+    overview: "Portfolio overview",
     properties: "Property command",
     staff: "Staff directory",
     payroll: "Payroll control",
-    cameras: "Camera monitoring",
+    cameras: "Security monitoring",
     maintenance: "Maintenance queue",
     utilities: "Utilities spend",
-    flights: "Flight search",
+    flights: "Travel desk",
     rentals: "Rental management"
   };
   document.getElementById("pageTitle").textContent = titles[section];
+  document.body.classList.remove("nav-open");
 }
 
 function renderHero() {
@@ -326,21 +429,35 @@ function renderHero() {
   const totalMonthly = properties.reduce((sum, item) => sum + item.monthly, 0);
   const totalCameras = properties.reduce((sum, item) => sum + item.cameras, 0);
   const totalStaff = staff.length;
+  const propertyOpenTasks = scopedTasks().filter((task) => !state.completedTasks.has(task.id)).length;
 
-  document.getElementById("heroHeadline").textContent = `${properties.length} properties, ${totalStaff} staff, ${totalCameras} cameras`;
+  document.getElementById("heroHeadline").textContent =
+    state.section === "overview"
+      ? `${properties.length} properties, ${totalStaff} staff, ${totalCameras} cameras`
+      : `${property.name}: ${property.staff} staff, ${property.cameras} cameras`;
   document.getElementById("heroSubhead").textContent =
     state.section === "overview"
-      ? "Consolidated visibility across residences, staff payroll, camera status, maintenance, utilities, travel, and rentals."
-      : `${property.name} is selected across the workspace.`;
+      ? "One operating view across residences, people, security, maintenance, utilities, travel, and guest stays."
+      : `${property.name} is active across every workspace below.`;
   document.getElementById("selectedPropertyLabel").textContent =
-    state.section === "overview" ? "Portfolio view" : `${property.name} active`;
+    state.section === "overview" ? `${property.name} selected` : property.name;
 
-  document.getElementById("heroStats").innerHTML = [
-    ["Portfolio value", currency.format(totalValue)],
-    ["Monthly operations", currency.format(totalMonthly)],
-    ["Open work orders", openTasks().length],
-    ["Payroll pending", pendingPayroll().length]
-  ]
+  const stats =
+    state.section === "overview"
+      ? [
+          ["Portfolio value", currency.format(totalValue)],
+          ["Monthly operations", currency.format(totalMonthly)],
+          ["Open work orders", openTasks().length],
+          ["Owner decisions", pendingPayroll().length + rentalBookings.filter((booking) => bookingStatus(booking) === "Requested").length]
+        ]
+      : [
+          ["Estimated value", currency.format(property.value)],
+          ["Monthly operations", currency.format(property.monthly)],
+          ["Open work orders", propertyOpenTasks],
+          ["Payroll pending", pendingPayroll().length]
+        ];
+
+  document.getElementById("heroStats").innerHTML = stats
     .map(
       ([label, value]) => `
         <div class="hero-stat">
@@ -354,12 +471,17 @@ function renderHero() {
 
 function renderProperties() {
   document.documentElement.style.setProperty("--property-image", estateImage);
+  const propertyOptions = properties
+    .map((property) => `<option value="${property.id}" ${property.id === state.propertyId ? "selected" : ""}>${property.name}</option>`)
+    .join("");
+  document.getElementById("propertyContext").innerHTML = propertyOptions;
+  document.getElementById("workOrderProperty").innerHTML = propertyOptions;
   document.getElementById("propertyStrip").innerHTML = properties
     .map((property) => {
       const statusClass = property.security === "Review" ? "warn" : "";
       const openTaskCount = tasks.filter((task) => task.propertyId === property.id && !state.completedTasks.has(task.id)).length;
       return `
-        <button class="property-card ${property.id === state.propertyId ? "is-active" : ""}" type="button" data-property="${property.id}">
+        <button class="property-card ${property.id === state.propertyId ? "is-active" : ""}" type="button" data-property="${property.id}" style="--property-color:${property.color}">
           <div class="property-card-head">
             <strong>${property.name}</strong>
             <span class="status-chip ${statusClass}">${property.security}</span>
@@ -376,13 +498,7 @@ function renderProperties() {
     .join("");
 
   document.querySelectorAll("[data-property]").forEach((button) => {
-    button.addEventListener("click", () => {
-      state.propertyId = button.dataset.property;
-      state.flightPropertyId = state.propertyId;
-      const firstCamera = cameras.find((camera) => camera.propertyId === state.propertyId);
-      if (firstCamera) state.selectedCameraId = firstCamera.id;
-      renderAll();
-    });
+    button.addEventListener("click", () => activateProperty(button.dataset.property));
   });
 }
 
@@ -461,11 +577,7 @@ function renderOverview() {
     </div>
   `;
   document.querySelectorAll(".zone-card").forEach((button) => {
-    button.addEventListener("click", () => {
-      state.propertyId = button.dataset.property;
-      state.flightPropertyId = state.propertyId;
-      renderAll();
-    });
+    button.addEventListener("click", () => activateProperty(button.dataset.property));
   });
 }
 
@@ -653,6 +765,7 @@ function renderMaintenance() {
       if (input.checked) state.completedTasks.add(id);
       else state.completedTasks.delete(id);
       renderAll();
+      showToast(input.checked ? "Work order marked complete" : "Work order reopened");
     });
   });
 }
@@ -893,11 +1006,7 @@ function renderRentals() {
   `;
 
   document.querySelectorAll("[data-rental-property]").forEach((button) => {
-    button.addEventListener("click", () => {
-      state.propertyId = button.dataset.rentalProperty;
-      state.flightPropertyId = state.propertyId;
-      renderAll();
-    });
+    button.addEventListener("click", () => activateProperty(button.dataset.rentalProperty));
   });
 
   document.querySelectorAll("[data-booking-action]").forEach((button) => {
@@ -911,6 +1020,7 @@ function renderRentals() {
         state.acceptedBookings.delete(bookingId);
       }
       renderAll();
+      showToast(button.dataset.bookingAction === "accept" ? "Booking request approved" : "Booking request declined");
     });
   });
 
@@ -919,7 +1029,9 @@ function renderRentals() {
       const channel = button.dataset.channel;
       if (state.pausedChannels.has(channel)) state.pausedChannels.delete(channel);
       else state.pausedChannels.add(channel);
+      const paused = state.pausedChannels.has(channel);
       renderRentals();
+      showToast(paused ? "Rental channel paused" : "Rental channel is live");
     });
   });
 
@@ -930,6 +1042,7 @@ function renderRentals() {
       const nextRate = Math.max(0, Number(input.value) || property.nightlyRate);
       property.nightlyRate = nextRate;
       renderAll();
+      showToast("Nightly rate synchronized");
     });
   }
   hydrateIcons();
@@ -940,7 +1053,22 @@ function bindEvents() {
     button.addEventListener("click", () => {
       setPanel(button.dataset.section);
       renderAll();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
+  });
+
+  document.querySelectorAll("[data-jump]").forEach((button) => {
+    button.addEventListener("click", () => {
+      setPanel(button.dataset.jump);
+      renderAll();
+      setNotifications(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+
+  document.getElementById("propertyContext").addEventListener("change", (event) => {
+    activateProperty(event.target.value);
+    showToast(`${selectedProperty().name} is now active`);
   });
 
   document.getElementById("staffSearch").addEventListener("input", (event) => {
@@ -949,8 +1077,10 @@ function bindEvents() {
   });
 
   document.getElementById("approvePayrollButton").addEventListener("click", () => {
+    const pending = pendingPayroll().length;
     scopedPayroll().forEach((member) => state.approvedStaffIds.add(member.id));
     renderAll();
+    showToast(pending ? `${pending} payroll payments approved` : "Payroll is already fully approved");
   });
 
   document.querySelectorAll("[data-camera-mode]").forEach((button) => {
@@ -977,6 +1107,7 @@ function bindEvents() {
     state.flightTravelers = Number(document.getElementById("flightTravelers").value) || 1;
     state.flightCabin = document.getElementById("flightCabin").value;
     renderAll();
+    showToast(`Flight options updated for ${flightProperty().name}`);
   });
 
   ["flightOrigin", "flightProperty", "flightDepart", "flightReturn", "flightTravelers", "flightCabin"].forEach((id) => {
@@ -999,19 +1130,87 @@ function bindEvents() {
   });
 
   document.getElementById("refreshButton").addEventListener("click", () => {
-    document.getElementById("lastUpdated").textContent = `Updated ${new Date().toLocaleTimeString([], {
-      hour: "numeric",
-      minute: "2-digit"
-    })}`;
+    const time = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    document.getElementById("lastUpdated").textContent = `Updated ${time}`;
+    document.getElementById("heroTime").textContent = `Synced ${time}`;
     renderAll();
+    showToast("Portfolio data refreshed");
   });
 
   document.getElementById("propertyPulseButton").addEventListener("click", () => {
     const status = document.getElementById("deskStatus");
     status.textContent = `${selectedProperty().name} check completed`;
+    showToast(`${selectedProperty().name} systems check completed`);
     setTimeout(() => {
       status.textContent = "All critical services clear";
     }, 2400);
+  });
+
+  document.getElementById("menuButton").addEventListener("click", () => document.body.classList.add("nav-open"));
+  document.getElementById("mobileBackdrop").addEventListener("click", () => document.body.classList.remove("nav-open"));
+
+  document.getElementById("notificationsButton").addEventListener("click", () => setNotifications(true));
+  document.getElementById("closeNotificationsButton").addEventListener("click", () => setNotifications(false));
+  document.getElementById("drawerBackdrop").addEventListener("click", () => setNotifications(false));
+
+  document.getElementById("commandButton").addEventListener("click", openCommandDialog);
+  document.getElementById("closeCommandButton").addEventListener("click", () => document.getElementById("commandDialog").close());
+  document.getElementById("commandSearch").addEventListener("input", (event) => renderCommandResults(event.target.value));
+  document.getElementById("commandResults").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-command-section]");
+    if (!button) return;
+    setPanel(button.dataset.commandSection);
+    renderAll();
+    document.getElementById("commandDialog").close();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+      event.preventDefault();
+      if (!document.getElementById("commandDialog").open) openCommandDialog();
+    }
+  });
+
+  document.getElementById("addWorkOrderButton").addEventListener("click", () => {
+    document.getElementById("workOrderProperty").value = state.propertyId;
+    document.getElementById("workOrderDue").value = defaultDate(3);
+    document.getElementById("workOrderDialog").showModal();
+    document.getElementById("workOrderTitle").focus();
+  });
+
+  ["closeWorkOrderButton", "cancelWorkOrderButton"].forEach((id) => {
+    document.getElementById(id).addEventListener("click", () => document.getElementById("workOrderDialog").close());
+  });
+
+  document.getElementById("workOrderForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const propertyId = document.getElementById("workOrderProperty").value;
+    const dueValue = document.getElementById("workOrderDue").value;
+    const dueDate = new Date(`${dueValue}T12:00:00`);
+    tasks.unshift({
+      id: Math.max(...tasks.map((task) => task.id)) + 1,
+      propertyId,
+      title: sanitizeText(document.getElementById("workOrderTitle").value.trim()),
+      vendor: sanitizeText(document.getElementById("workOrderVendor").value.trim()),
+      due: dueDate.toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+      priority: document.getElementById("workOrderPriority").value,
+      category: "General"
+    });
+    state.propertyId = propertyId;
+    state.flightPropertyId = propertyId;
+    document.getElementById("workOrderDialog").close();
+    document.getElementById("workOrderForm").reset();
+    setPanel("maintenance");
+    renderAll();
+    showToast("New work order created");
+  });
+
+  ["commandDialog", "workOrderDialog"].forEach((id) => {
+    const dialog = document.getElementById(id);
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
   });
 }
 
@@ -1033,6 +1232,11 @@ function renderAll() {
 hydrateIcons();
 state.flightDepart = defaultDate(7);
 state.flightReturn = defaultDate(11);
+document.getElementById("dateLabel").textContent = new Date().toLocaleDateString("en-US", {
+  weekday: "long",
+  month: "long",
+  day: "numeric"
+});
 bindEvents();
 setPanel("overview");
 renderAll();

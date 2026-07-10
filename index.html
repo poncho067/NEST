@@ -3,21 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#17211d" />
+    <meta
+      name="description"
+      content="NEST is a private estate operations dashboard for property, staff, security, travel, and rental management."
+    />
     <title>NEST | Private Estate Operations</title>
+    <link rel="icon" href="data:," />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="app-shell">
-      <aside class="sidebar" aria-label="Primary navigation">
+      <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
         <div class="brand">
-          <div class="brand-mark">N</div>
+          <div class="brand-mark" aria-hidden="true">N</div>
           <div>
             <strong>NEST</strong>
-            <span>Private estate operations</span>
+            <span>Private estate office</span>
           </div>
         </div>
 
+        <div class="portfolio-identity">
+          <span class="portfolio-avatar">FF</span>
+          <div>
+            <strong>Farias Family</strong>
+            <span>San Pedro portfolio</span>
+          </div>
+          <span class="status-dot" aria-label="Portfolio online"></span>
+        </div>
+
         <nav class="nav-list">
+          <p class="nav-label">Portfolio</p>
           <button class="nav-item is-active" type="button" data-section="overview">
             <span class="nav-icon" data-icon="layout"></span>
             <span>Overview</span>
@@ -30,13 +46,16 @@
             <span class="nav-icon" data-icon="users"></span>
             <span>Staff</span>
           </button>
+
+          <p class="nav-label">Operations</p>
           <button class="nav-item" type="button" data-section="payroll">
             <span class="nav-icon" data-icon="wallet"></span>
             <span>Payroll</span>
           </button>
           <button class="nav-item" type="button" data-section="cameras">
             <span class="nav-icon" data-icon="camera"></span>
-            <span>Cameras</span>
+            <span>Security</span>
+            <span class="nav-count" aria-label="One camera alert">1</span>
           </button>
           <button class="nav-item" type="button" data-section="maintenance">
             <span class="nav-icon" data-icon="wrench"></span>
@@ -46,18 +65,21 @@
             <span class="nav-icon" data-icon="bolt"></span>
             <span>Utilities</span>
           </button>
+
+          <p class="nav-label">Concierge</p>
           <button class="nav-item" type="button" data-section="flights">
             <span class="nav-icon" data-icon="plane"></span>
-            <span>Flights</span>
+            <span>Travel</span>
           </button>
           <button class="nav-item" type="button" data-section="rentals">
             <span class="nav-icon" data-icon="key"></span>
             <span>Rentals</span>
+            <span class="nav-count nav-count-warm" aria-label="Two booking requests">2</span>
           </button>
         </nav>
 
         <div class="sidebar-brief">
-          <span class="signal-dot"></span>
+          <span class="signal-ring"><span></span></span>
           <div>
             <strong>Estate desk online</strong>
             <span id="deskStatus">All critical services clear</span>
@@ -65,232 +87,384 @@
         </div>
       </aside>
 
+      <button class="mobile-backdrop" id="mobileBackdrop" type="button" aria-label="Close navigation"></button>
+
       <main class="workspace">
         <header class="topbar">
-          <div class="title-block">
-            <p>San Pedro portfolio</p>
-            <h1 id="pageTitle">Private estate command center</h1>
+          <div class="title-area">
+            <button class="icon-button menu-button" id="menuButton" type="button" aria-label="Open navigation" title="Open navigation">
+              <span data-icon="menu"></span>
+            </button>
+            <div class="title-block">
+              <p id="dateLabel">Private estate office</p>
+              <h1 id="pageTitle">Portfolio overview</h1>
+            </div>
           </div>
+
           <div class="top-actions">
+            <label class="property-context">
+              <span>Viewing</span>
+              <select id="propertyContext" aria-label="Selected property"></select>
+            </label>
+            <button class="icon-button" id="commandButton" type="button" aria-label="Search workspace" title="Search workspace">
+              <span data-icon="search"></span>
+            </button>
             <button class="icon-button" id="refreshButton" type="button" aria-label="Refresh dashboard" title="Refresh dashboard">
               <span data-icon="refresh"></span>
             </button>
-            <button class="icon-button has-alert" type="button" aria-label="Open alerts" title="Open alerts">
+            <button class="icon-button has-alert" id="notificationsButton" type="button" aria-label="Open notifications" title="Open notifications">
               <span data-icon="bell"></span>
             </button>
-            <div class="owner-pill">
-              <span>FM</span>
+            <div class="owner-pill" aria-label="Signed in as Fernando Farias">
+              <span>FF</span>
               <div>
-                <strong>Farias Family</strong>
-                <small>Owner portal</small>
+                <strong>Fernando Farias</strong>
+                <small>Owner</small>
               </div>
             </div>
           </div>
         </header>
 
-        <section class="hero-band" aria-label="Portfolio summary">
-          <div class="hero-copy">
-            <span class="eyebrow">Live operating picture</span>
-            <h2 id="heroHeadline">4 properties, 32 staff, 46 cameras</h2>
-            <p id="heroSubhead">
-              Consolidated visibility across residences, staff payroll, camera status, maintenance, and utilities.
-            </p>
-            <div class="hero-stats" id="heroStats"></div>
-          </div>
-          <div class="hero-visual">
-            <img src="assets/san-pedro-estate.png" alt="Luxury residential estate in San Pedro" />
-            <div class="visual-overlay">
-              <span>San Pedro Garza Garcia</span>
-              <strong id="selectedPropertyLabel">Portfolio view</strong>
+        <div class="workspace-inner">
+          <section class="hero-band" aria-label="Portfolio live view">
+            <div class="hero-copy">
+              <div class="hero-status-row">
+                <span class="eyebrow"><span class="signal-dot"></span> Portfolio live</span>
+                <span class="hero-time" id="heroTime">Synced moments ago</span>
+              </div>
+              <h2 id="heroHeadline">4 properties, 32 staff, 20 cameras</h2>
+              <p id="heroSubhead">
+                One operating view across residences, people, security, maintenance, utilities, travel, and guest stays.
+              </p>
+              <div class="hero-stats" id="heroStats"></div>
             </div>
-          </div>
-        </section>
+            <div class="hero-visual">
+              <img src="assets/nest-san-pedro-estate-v2.png" alt="Contemporary private estate below the Sierra Madre in San Pedro" />
+              <div class="visual-scrim"></div>
+              <div class="visual-topline">
+                <span class="live-badge"><span></span> Live estate view</span>
+                <span>San Pedro Garza Garcia</span>
+              </div>
+              <div class="visual-overlay">
+                <span>Active context</span>
+                <strong id="selectedPropertyLabel">Portfolio view</strong>
+              </div>
+            </div>
+          </section>
 
-        <section class="property-strip" aria-label="Properties" id="propertyStrip"></section>
-
-        <section class="panel is-visible" data-panel="overview">
-          <div class="section-heading">
-            <div>
-              <p>Today</p>
-              <h2>Operating summary</h2>
-            </div>
-            <span id="lastUpdated">Updated just now</span>
-          </div>
-          <div class="overview-grid">
-            <div class="metric-board" id="metricBoard"></div>
-            <div class="operations-list" id="operationsList"></div>
-            <div class="portfolio-map" id="portfolioMap"></div>
-          </div>
-        </section>
-
-        <section class="panel" data-panel="properties" hidden>
-          <div class="section-heading">
-            <div>
-              <p>Portfolio</p>
-              <h2>Property command</h2>
-            </div>
-            <button class="text-button" type="button" id="propertyPulseButton">
-              <span data-icon="activity"></span>
-              Run property check
-            </button>
-          </div>
-          <div class="property-command" id="propertyCommand"></div>
-        </section>
-
-        <section class="panel" data-panel="staff" hidden>
-          <div class="section-heading">
-            <div>
-              <p>Household team</p>
-              <h2>Staff directory</h2>
-            </div>
-            <label class="search-field">
-              <span data-icon="search"></span>
-              <input id="staffSearch" type="search" placeholder="Search staff, role, property" />
-            </label>
-          </div>
-          <div class="staff-layout">
-            <div class="staff-list" id="staffList"></div>
-            <div class="staff-summary" id="staffSummary"></div>
-          </div>
-        </section>
-
-        <section class="panel" data-panel="payroll" hidden>
-          <div class="section-heading">
-            <div>
-              <p>Compensation</p>
-              <h2>Payroll control</h2>
-            </div>
-            <button class="text-button" id="approvePayrollButton" type="button">
-              <span data-icon="check"></span>
-              Approve pending
-            </button>
-          </div>
-          <div class="payroll-layout">
-            <div class="payroll-summary" id="payrollSummary"></div>
-            <div class="payroll-table-wrap">
-              <table class="payroll-table">
-                <thead>
-                  <tr>
-                    <th>Staff</th>
-                    <th>Property</th>
-                    <th>Net pay</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody id="payrollRows"></tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        <section class="panel" data-panel="cameras" hidden>
-          <div class="section-heading">
-            <div>
-              <p>Security</p>
-              <h2>Camera monitoring</h2>
-            </div>
-            <div class="segmented-control" aria-label="Camera layout">
-              <button type="button" class="is-selected" data-camera-mode="grid">Grid</button>
-              <button type="button" data-camera-mode="focus">Focus</button>
-            </div>
-          </div>
-          <div class="camera-layout" id="cameraLayout"></div>
-        </section>
-
-        <section class="panel" data-panel="maintenance" hidden>
-          <div class="section-heading">
-            <div>
-              <p>Service desk</p>
-              <h2>Maintenance queue</h2>
-            </div>
-            <span id="maintenanceCounter"></span>
-          </div>
-          <div class="maintenance-board" id="maintenanceBoard"></div>
-        </section>
-
-        <section class="panel" data-panel="utilities" hidden>
-          <div class="section-heading">
-            <div>
-              <p>Consumption</p>
-              <h2>Utilities spend</h2>
-            </div>
-            <div class="segmented-control" aria-label="Utility period">
-              <button type="button" class="is-selected" data-utility-period="month">Month</button>
-              <button type="button" data-utility-period="quarter">Quarter</button>
-            </div>
-          </div>
-          <div class="utilities-layout" id="utilitiesLayout"></div>
-        </section>
-
-        <section class="panel" data-panel="flights" hidden>
-          <div class="section-heading">
-            <div>
-              <p>Travel desk</p>
-              <h2>Flight search</h2>
-            </div>
-            <span id="flightRouteSummary"></span>
-          </div>
-          <div class="flight-layout">
-            <form class="flight-search" id="flightSearch">
-              <label>
-                <span>Origin</span>
-                <select id="flightOrigin">
-                  <option value="MEX">Mexico City - MEX</option>
-                  <option value="IAH">Houston - IAH</option>
-                  <option value="DAL">Dallas - DAL</option>
-                  <option value="LAX">Los Angeles - LAX</option>
-                </select>
-              </label>
-              <label>
-                <span>Destination property</span>
-                <select id="flightProperty"></select>
-              </label>
-              <label>
-                <span>Departure</span>
-                <input id="flightDepart" type="date" />
-              </label>
-              <label>
-                <span>Return</span>
-                <input id="flightReturn" type="date" />
-              </label>
-              <label>
-                <span>Travelers</span>
-                <input id="flightTravelers" type="number" min="1" max="12" value="2" />
-              </label>
-              <label>
-                <span>Cabin</span>
-                <select id="flightCabin">
-                  <option value="Business">Business</option>
-                  <option value="First">First</option>
-                  <option value="Private">Private</option>
-                </select>
-              </label>
-              <button class="text-button" type="submit">
-                <span data-icon="search"></span>
-                Search flights
+          <section class="property-section" aria-label="Properties">
+            <div class="section-intro compact">
+              <div>
+                <span>Residences</span>
+                <strong>Property health</strong>
+              </div>
+              <button class="inline-action" type="button" data-jump="properties">
+                View portfolio <span data-icon="arrow-right"></span>
               </button>
-            </form>
-            <div class="flight-results" id="flightResults"></div>
-          </div>
-        </section>
+            </div>
+            <div class="property-strip" id="propertyStrip"></div>
+          </section>
 
-        <section class="panel" data-panel="rentals" hidden>
-          <div class="section-heading">
-            <div>
-              <p>Revenue</p>
-              <h2>Rental management</h2>
+          <section class="panel is-visible" data-panel="overview">
+            <div class="section-heading">
+              <div>
+                <p>Today</p>
+                <h2>Operating picture</h2>
+                <span>Owner decisions and exceptions across the active property.</span>
+              </div>
+              <span class="updated-label" id="lastUpdated">Updated just now</span>
             </div>
-            <div class="segmented-control" aria-label="Rental channel">
-              <button type="button" class="is-selected" data-rental-mode="direct">Direct</button>
-              <button type="button" data-rental-mode="channels">Channels</button>
+            <div class="overview-grid">
+              <div class="metric-board" id="metricBoard"></div>
+              <div class="operations-list" id="operationsList"></div>
+              <div class="portfolio-map" id="portfolioMap"></div>
             </div>
-          </div>
-          <div class="rental-layout">
-            <div class="rental-board" id="rentalBoard"></div>
-            <div class="booking-panel" id="bookingPanel"></div>
-          </div>
-        </section>
+          </section>
+
+          <section class="panel" data-panel="properties" hidden>
+            <div class="section-heading">
+              <div>
+                <p>Portfolio</p>
+                <h2>Property command</h2>
+                <span>Readiness, spend, access, and service status by residence.</span>
+              </div>
+              <button class="primary-button" type="button" id="propertyPulseButton">
+                <span data-icon="activity"></span>
+                Run property check
+              </button>
+            </div>
+            <div class="property-command" id="propertyCommand"></div>
+          </section>
+
+          <section class="panel" data-panel="staff" hidden>
+            <div class="section-heading">
+              <div>
+                <p>Household team</p>
+                <h2>Staff directory</h2>
+                <span>Roles, assignments, and payroll readiness for each residence.</span>
+              </div>
+              <label class="search-field">
+                <span data-icon="search"></span>
+                <input id="staffSearch" type="search" placeholder="Search staff, role, or department" />
+              </label>
+            </div>
+            <div class="staff-layout">
+              <div class="staff-list" id="staffList"></div>
+              <div class="staff-summary" id="staffSummary"></div>
+            </div>
+          </section>
+
+          <section class="panel" data-panel="payroll" hidden>
+            <div class="section-heading">
+              <div>
+                <p>Compensation</p>
+                <h2>Payroll control</h2>
+                <span>Review net pay and release the current household cycle.</span>
+              </div>
+              <button class="primary-button" id="approvePayrollButton" type="button">
+                <span data-icon="check"></span>
+                Approve pending
+              </button>
+            </div>
+            <div class="payroll-layout">
+              <div class="payroll-summary" id="payrollSummary"></div>
+              <div class="payroll-table-wrap">
+                <table class="payroll-table">
+                  <thead>
+                    <tr>
+                      <th>Staff member</th>
+                      <th>Property</th>
+                      <th>Net pay</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="payrollRows"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" data-panel="cameras" hidden>
+            <div class="section-heading">
+              <div>
+                <p>Security</p>
+                <h2>Camera monitoring</h2>
+                <span>Perimeter, access, and service feeds for the active property.</span>
+              </div>
+              <div class="segmented-control" aria-label="Camera layout">
+                <button type="button" class="is-selected" data-camera-mode="grid">Grid</button>
+                <button type="button" data-camera-mode="focus">Focus</button>
+              </div>
+            </div>
+            <div class="camera-layout" id="cameraLayout"></div>
+          </section>
+
+          <section class="panel" data-panel="maintenance" hidden>
+            <div class="section-heading">
+              <div>
+                <p>Service desk</p>
+                <h2>Maintenance queue</h2>
+                <span>Owner-visible work orders, due dates, and trusted vendors.</span>
+              </div>
+              <div class="heading-actions">
+                <span class="updated-label" id="maintenanceCounter"></span>
+                <button class="primary-button" id="addWorkOrderButton" type="button">
+                  <span data-icon="plus"></span>
+                  New work order
+                </button>
+              </div>
+            </div>
+            <div class="maintenance-board" id="maintenanceBoard"></div>
+          </section>
+
+          <section class="panel" data-panel="utilities" hidden>
+            <div class="section-heading">
+              <div>
+                <p>Consumption</p>
+                <h2>Utilities spend</h2>
+                <span>Track current cost against the operating threshold.</span>
+              </div>
+              <div class="segmented-control" aria-label="Utility period">
+                <button type="button" class="is-selected" data-utility-period="month">Month</button>
+                <button type="button" data-utility-period="quarter">Quarter</button>
+              </div>
+            </div>
+            <div class="utilities-layout" id="utilitiesLayout"></div>
+          </section>
+
+          <section class="panel" data-panel="flights" hidden>
+            <div class="section-heading">
+              <div>
+                <p>Travel desk</p>
+                <h2>Flights to your properties</h2>
+                <span>Compare scheduled cabins and private charter options with ground transfer time.</span>
+              </div>
+              <span class="route-summary" id="flightRouteSummary"></span>
+            </div>
+            <div class="flight-layout">
+              <form class="flight-search" id="flightSearch">
+                <label>
+                  <span>Origin</span>
+                  <select id="flightOrigin">
+                    <option value="MEX">Mexico City - MEX</option>
+                    <option value="IAH">Houston - IAH</option>
+                    <option value="DAL">Dallas - DAL</option>
+                    <option value="LAX">Los Angeles - LAX</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Destination property</span>
+                  <select id="flightProperty"></select>
+                </label>
+                <label>
+                  <span>Departure</span>
+                  <input id="flightDepart" type="date" />
+                </label>
+                <label>
+                  <span>Return</span>
+                  <input id="flightReturn" type="date" />
+                </label>
+                <label>
+                  <span>Travelers</span>
+                  <input id="flightTravelers" type="number" min="1" max="12" value="2" />
+                </label>
+                <label>
+                  <span>Cabin</span>
+                  <select id="flightCabin">
+                    <option value="Business">Business</option>
+                    <option value="First">First</option>
+                    <option value="Private">Private</option>
+                  </select>
+                </label>
+                <button class="primary-button flight-submit" type="submit">
+                  <span data-icon="search"></span>
+                  Search flights
+                </button>
+              </form>
+              <div class="flight-results" id="flightResults"></div>
+            </div>
+          </section>
+
+          <section class="panel" data-panel="rentals" hidden>
+            <div class="section-heading">
+              <div>
+                <p>Revenue</p>
+                <h2>Rental management</h2>
+                <span>Approve private stays and synchronize rates across external channels.</span>
+              </div>
+              <div class="segmented-control" aria-label="Rental channel">
+                <button type="button" class="is-selected" data-rental-mode="direct">Direct</button>
+                <button type="button" data-rental-mode="channels">Channels</button>
+              </div>
+            </div>
+            <div class="rental-layout">
+              <div class="rental-board" id="rentalBoard"></div>
+              <div class="booking-panel" id="bookingPanel"></div>
+            </div>
+          </section>
+        </div>
       </main>
+    </div>
+
+    <button class="drawer-backdrop" id="drawerBackdrop" type="button" aria-label="Close notifications"></button>
+    <aside class="notification-drawer" id="notificationDrawer" aria-hidden="true" aria-label="Notifications">
+      <div class="drawer-header">
+        <div>
+          <span>Estate desk</span>
+          <h2>Notifications</h2>
+        </div>
+        <button class="icon-button" id="closeNotificationsButton" type="button" aria-label="Close notifications" title="Close notifications">
+          <span data-icon="close"></span>
+        </button>
+      </div>
+      <div class="notification-list">
+        <article class="notification-item alert">
+          <span class="notification-icon" data-icon="camera"></span>
+          <div>
+            <strong>Camera feed offline</strong>
+            <p>Campestre elevator lobby stopped reporting 18 minutes ago.</p>
+            <button type="button" data-jump="cameras">Review security</button>
+          </div>
+        </article>
+        <article class="notification-item warn">
+          <span class="notification-icon" data-icon="wallet"></span>
+          <div>
+            <strong>Payroll approval due</strong>
+            <p>Four staff payments require owner approval before 3:00 PM.</p>
+            <button type="button" data-jump="payroll">Open payroll</button>
+          </div>
+        </article>
+        <article class="notification-item">
+          <span class="notification-icon" data-icon="wrench"></span>
+          <div>
+            <strong>Vendor arrival confirmed</strong>
+            <p>Aqua Norte is scheduled at Casa Sierra Alta today at 11:30 AM.</p>
+            <button type="button" data-jump="maintenance">View work order</button>
+          </div>
+        </article>
+      </div>
+    </aside>
+
+    <dialog class="command-dialog" id="commandDialog">
+      <div class="dialog-header">
+        <label class="command-search">
+          <span data-icon="search"></span>
+          <input id="commandSearch" type="search" placeholder="Search NEST" autocomplete="off" />
+        </label>
+        <button class="icon-button" id="closeCommandButton" type="button" aria-label="Close search" title="Close search">
+          <span data-icon="close"></span>
+        </button>
+      </div>
+      <div class="command-results" id="commandResults"></div>
+    </dialog>
+
+    <dialog class="work-order-dialog" id="workOrderDialog">
+      <form id="workOrderForm">
+        <div class="dialog-title-row">
+          <div>
+            <span>Service desk</span>
+            <h2>New work order</h2>
+          </div>
+          <button class="icon-button" id="closeWorkOrderButton" type="button" aria-label="Close work order" title="Close work order">
+            <span data-icon="close"></span>
+          </button>
+        </div>
+        <div class="form-grid">
+          <label class="field-wide">
+            <span>Issue</span>
+            <input id="workOrderTitle" type="text" placeholder="Describe the work required" required />
+          </label>
+          <label>
+            <span>Property</span>
+            <select id="workOrderProperty" required></select>
+          </label>
+          <label>
+            <span>Vendor</span>
+            <input id="workOrderVendor" type="text" placeholder="Vendor or team" required />
+          </label>
+          <label>
+            <span>Due date</span>
+            <input id="workOrderDue" type="date" required />
+          </label>
+          <label>
+            <span>Priority</span>
+            <select id="workOrderPriority">
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="low">Low</option>
+            </select>
+          </label>
+        </div>
+        <div class="dialog-actions">
+          <button class="ghost-button" id="cancelWorkOrderButton" type="button">Cancel</button>
+          <button class="primary-button" type="submit">Create work order</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+      <span data-icon="check"></span>
+      <span id="toastMessage">Updated</span>
     </div>
 
     <script src="app.js"></script>

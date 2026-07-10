@@ -1,8 +1,10 @@
 # NEST
 
-NEST is a static SaaS dashboard prototype for private family estate operations in San Pedro.
+NEST is a responsive SaaS dashboard prototype for private family estate operations in San Pedro.
 
-It includes portfolio oversight, staff and payroll management, camera monitoring, maintenance, utilities, flight search, and rental/channel management.
+It includes portfolio oversight, a 32-person staff directory, payroll approval, camera monitoring, maintenance work orders, utility tracking, flight search, and direct or third-party rental management.
+
+The interface is fully interactive in the browser. Data, payments, camera feeds, flight inventory, and rental channel connections are simulated for product review.
 
 ## Run locally
 
